@@ -1,0 +1,7 @@
+{
+  "name": "custom-app-surfaces-sdk",
+  "description": "Client SDK for Pipedrive custom app surface extensions",
+  "owner": "GRAVITY",
+  "type": "library",
+  "status": "released"
+}
