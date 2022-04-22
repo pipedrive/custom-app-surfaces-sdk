@@ -90,7 +90,7 @@ export enum ModalStatus {
 }
 
 export enum TrackingEvent {
-	FOCUS = 'focus',
+	FOCUSED = 'focused',
 }
 
 export type Args<T extends Command> = {
