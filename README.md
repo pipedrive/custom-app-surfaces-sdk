@@ -262,6 +262,17 @@ const { status, id } = await sdk.execute(Command.OPEN_MODAL, {
 });
 ```
 
+
+### Close modal
+
+Closes active modal
+
+**Example**
+
+```javascript
+await sdk.execute(Command.CLOSE_MODAL);
+```
+
 ## Events
 
 Subscribe to events triggered by user.

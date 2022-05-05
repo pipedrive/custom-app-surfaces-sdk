@@ -6,7 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- New `CLOSE_MODAL` command
+
 ## [0.1.1] - 2022-05-05
+
+### Updated
+- Rename FOCUS tracking event
 
 ## [0.1.0] - 2022-03-25
 
