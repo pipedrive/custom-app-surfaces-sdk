@@ -33,7 +33,7 @@ class SurfaceSDK {
 		}
 
 		detectIframeFocus(() => {
-			this.track(TrackingEvent.FOCUS);
+			this.track(TrackingEvent.FOCUSED);
 		});
 	}
 
