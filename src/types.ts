@@ -9,6 +9,7 @@ export enum Command {
 	RESIZE = 'resize',
 	INITIALIZE = 'initialize',
 	OPEN_MODAL = 'open_modal',
+	CLOSE_MODAL = 'close_modal',
 	GET_SIGNED_TOKEN = 'get_signed_token',
 }
 
@@ -108,6 +109,7 @@ export type Args<T extends Command> = {
 	};
 	[Command.RESIZE]: SizeArgs;
 	[Command.OPEN_MODAL]: ModalAttributes;
+	[Command.CLOSE_MODAL]: void;
 	[Command.GET_SIGNED_TOKEN]: void;
 }[T];
 
@@ -122,6 +124,7 @@ export type CommandResponse<T extends Command> = {
 		status: ModalStatus;
 		id?: number;
 	};
+	[Command.CLOSE_MODAL]: void;
 	[Command.GET_SIGNED_TOKEN]: {
 		token: string;
 	};
