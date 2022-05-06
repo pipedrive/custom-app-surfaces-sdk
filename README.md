@@ -265,7 +265,7 @@ const { status, id } = await sdk.execute(Command.OPEN_MODAL, {
 
 ### Close modal
 
-Closes active modal
+Closes an active modal window, applicable only from Custom Surface Modal.
 
 **Example**
 
