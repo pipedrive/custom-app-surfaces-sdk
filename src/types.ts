@@ -85,7 +85,7 @@ export type CustomSurfaceModalAttributes = {
 	action_id: string;
 	prefill: {
 		[key: string]: string;
-	}
+	};
 };
 
 export type ModalAttributes =
