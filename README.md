@@ -15,6 +15,7 @@ Learn more about custom app surfaces from [Developer documentation](https://pipe
     - [Resize](#resize)
     - [Get signed token](#get-signed-token)
     - [Open modal](#open-modal)
+    - [Close modal](#close-modal)
 - [Events](#events)
     - [Surface visibility](#surface-visibility)
 
@@ -148,7 +149,7 @@ const { token } = await sdk.execute(Command.GET_SIGNED_TOKEN);
 
 ### Open modal
 
-Opens an [embedded action](#embedded-action) or a new Pipedrive [Deal](#new-deal-modal), [Organization](#new-organization-modal) or [Person](#new-person-modal) modal
+Opens an [embedded action](#embedded-action), [custom surface modal](#custom-surface-modal) or a new Pipedrive [Deal](#new-deal-modal), [Organization](#new-organization-modal) or [Person](#new-person-modal) modal
 
 ### Embedded action
 
@@ -169,8 +170,36 @@ Opens an [embedded action](#embedded-action) or a new Pipedrive [Deal](#new-deal
 
 ```javascript
 const { status } = await sdk.execute(Command.OPEN_MODAL, {
-  type: Modal.EMBEDDED_ACTION,
-  action_id: 'Open settings'
+	type: Modal.EMBEDDED_ACTION,
+	action_id: 'Open settings'
+});
+```
+
+### Custom surface modal
+
+**Parameters for custom surface modal**
+
+| Parameter|Type | Description                                                                                                                        | Notes |
+| --- | --- |------------------------------------------------------------------------------------------------------------------------------------| --- |
+| type | Modal |                                                                                                                                    | required |
+| action_id | String | Custom surface id or name                                                                                                          | required |
+| prefill | Object | Object to be passed as stringified JSON to iframe, should be used with caution taking into account HTTP GET request maximum length | optional |
+
+**Response**
+
+| Parameter|Type | Description | Notes |
+| --- | --- | --- | --- |
+| status | String | Indicates if modal was submitted or closed | |
+
+**Example**
+
+```javascript
+const { status } = await sdk.execute(Command.OPEN_MODAL, {
+  type: Modal.CUSTOM_SURFACE,
+  action_id: 'Open settings',
+  prefill: {
+	  item: 'xyz'
+  }
 });
 ```
 
