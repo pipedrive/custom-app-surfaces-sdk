@@ -187,11 +187,11 @@ const { status } = await sdk.execute(Command.OPEN_MODAL, {
 
 **Parameters for custom surface modal**
 
-| Parameter | Type   | Description                                                                                                                        | Notes    |
-|-----------|--------|------------------------------------------------------------------------------------------------------------------------------------|----------|
-| type      | Modal  |                                                                                                                                    | required |
-| action_id | String | Custom surface id or name                                                                                                          | required |
-| prefill   | Object | Object to be passed as stringified JSON to iframe, should be used with caution taking into account HTTP GET request maximum length | optional |
+| Parameter | Type   | Description                                                                                                                               | Notes    |
+|-----------|--------|-------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| type      | Modal  |                                                                                                                                           | required |
+| action_id | String | Custom surface id or name                                                                                                                 | required |
+| data      | Object | Object to be passed as stringified JSON to iframe, should be used with caution taking into account the maximum length of HTTP GET request | optional |
 
 **Response**
 
@@ -205,7 +205,7 @@ const { status } = await sdk.execute(Command.OPEN_MODAL, {
 const { status } = await sdk.execute(Command.OPEN_MODAL, {
   type: Modal.CUSTOM_SURFACE,
   action_id: 'Open settings',
-  prefill: {
+  data: {
     item: 'xyz'
   }
 });

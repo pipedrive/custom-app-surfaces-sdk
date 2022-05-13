@@ -83,7 +83,7 @@ export type EmbeddedActionModalAttributes = {
 export type CustomSurfaceModalAttributes = {
 	type: Modal.CUSTOM_SURFACE;
 	action_id: string;
-	prefill: {
+	data?: {
 		[key: string]: string;
 	};
 };
