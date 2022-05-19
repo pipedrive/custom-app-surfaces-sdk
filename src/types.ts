@@ -48,6 +48,7 @@ export enum Modal {
 	ORGANIZATION = 'organization',
 	PERSON = 'person',
 	EMBEDDED_ACTION = 'embedded_action',
+	CUSTOM_SURFACE = 'custom_surface',
 }
 
 export type DealModalAttributes = {
@@ -79,11 +80,20 @@ export type EmbeddedActionModalAttributes = {
 	action_id: string;
 };
 
+export type CustomSurfaceModalAttributes = {
+	type: Modal.CUSTOM_SURFACE;
+	action_id: string;
+	data?: {
+		[key: string]: string;
+	};
+};
+
 export type ModalAttributes =
 	| OrganizationModalAttributes
 	| DealModalAttributes
 	| PersonModalAttributes
-	| EmbeddedActionModalAttributes;
+	| EmbeddedActionModalAttributes
+	| CustomSurfaceModalAttributes;
 
 export enum ModalStatus {
 	CLOSED = 'closed',

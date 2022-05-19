@@ -2,7 +2,8 @@
 
 The SDK provides interactivity between custom app surfaces and Pipedrive.
 
-Learn more about custom app surfaces from [Developer documentation](https://pipedrive.readme.io/docs/custom-app-surfaces).
+Learn more about custom app surfaces
+from [Developer documentation](https://pipedrive.readme.io/docs/custom-app-surfaces).
 
 `npm install --save @pipedrive/custom-app-surfaces-sdk`
 
@@ -10,20 +11,21 @@ Learn more about custom app surfaces from [Developer documentation](https://pipe
 
 - [Initialization](#initialization)
 - [Commands](#commands)
-    - [Show snackbar](#show-snackbar)
-    - [Show confirmation dialog](#show-confirmation-dialog)
-    - [Resize](#resize)
-    - [Get signed token](#get-signed-token)
-    - [Open modal](#open-modal)
+  - [Show snackbar](#show-snackbar)
+  - [Show confirmation dialog](#show-confirmation-dialog)
+  - [Resize](#resize)
+  - [Get signed token](#get-signed-token)
+  - [Open modal](#open-modal)
+  - [Close modal](#close-modal)
 - [Events](#events)
-    - [Surface visibility](#surface-visibility)
-
+  - [Surface visibility](#surface-visibility)
 
 ## Initialization
 
 In order to display a custom app surface to the user, the SDK has to be initialized.
 In the iframe request, query id attribute is passed, which has to be provided to SDK constructor.
-The SDK will try to read it from the URL query. If the URL is modified (e.g. with redirects), then it has to be passed manually.
+The SDK will try to read it from the URL query. If the URL is modified (e.g. with redirects), then
+it has to be passed manually.
 
 ```javascript
 import SurfaceSDK from '@pipedrive/custom-app-surfaces-sdk';
@@ -38,7 +40,8 @@ const sdk = await new SurfaceSDK({ identifier: '123abc' })
 
 ## Commands
 
-Commands can be invoked with the `execute` method. On successful command execution, promise resolves. On error, it rejects.
+Commands can be invoked with the `execute` method. On successful command execution, promise
+resolves. On error, it rejects.
 
 ```javascript
 sdk.execute(/* ... */)
@@ -61,11 +64,11 @@ Shows snackbar with provided message and link
 
 **Parameters**
 
-| Parameter|Type | Description | Notes |
-| --- | --- | --- | --- |
-| message | String | Message displayed in snackbar | required |
-| link | Object | Link displayed next to the message | optional |
-| link.url | string | URL for link displayed in snackbar | required |
+| Parameter  | Type   | Description                          | Notes    |
+|------------|--------|--------------------------------------|----------|
+| message    | String | Message displayed in snackbar        | required |
+| link       | Object | Link displayed next to the message   | optional |
+| link.url   | string | URL for link displayed in snackbar   | required |
 | link.label | string | Label for link displayed in snackbar | required |
 
 **Example**
@@ -86,19 +89,19 @@ Shows confirmation dialog with provided title and description
 
 **Parameters**
 
-| Parameter|Type | Description | Notes |
-| --- | --- | --- | --- |
-| title | String | | required |
-| description | String | Longer description of what is confirmed | optional |
-| okText | String | Confirm button text | optional, default is "OK" |
-| cancelText | String | Cancel button text | optional, default is "Cancel" |
-| okColor | Color | Color of the confirmation button | optional, default is Color.NEGATIVE.<br/><br/>Available colors:<br/>Color.PRIMARY (green)<br/>Color.SECONDARY (white)<br/>Color.NEGATIVE (red) |
+| Parameter   | Type   | Description                             | Notes                                                                                                                                          |
+|-------------|--------|-----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| title       | String |                                         | required                                                                                                                                       |
+| description | String | Longer description of what is confirmed | optional                                                                                                                                       |
+| okText      | String | Confirm button text                     | optional, default is "OK"                                                                                                                      |
+| cancelText  | String | Cancel button text                      | optional, default is "Cancel"                                                                                                                  |
+| okColor     | Color  | Color of the confirmation button        | optional, default is Color.NEGATIVE.<br/><br/>Available colors:<br/>Color.PRIMARY (green)<br/>Color.SECONDARY (white)<br/>Color.NEGATIVE (red) |
 
 **Response**
 
-| Parameter|Type | Description | Notes |
-| --- | --- | --- | --- |
-| confirmed | Boolean | Result of confirmation | |
+| Parameter | Type    | Description            | Notes |
+|-----------|---------|------------------------|-------|
+| confirmed | Boolean | Result of confirmation |       |
 
 **Example**
 
@@ -117,10 +120,10 @@ Resizes custom app surface with provided height and width
 
 **Parameters**
 
-| Parameter|Type | Description | Notes |
-| --- | --- | --- | --- |
-| height | Number | Height of the surface | optional |
-| width | Number | Width of the surface | optional |
+| Parameter | Type   | Description           | Notes    |
+|-----------|--------|-----------------------|----------|
+| height    | Number | Height of the surface | optional |
+| width     | Number | Width of the surface  | optional |
 
 **Example**
 
@@ -130,15 +133,19 @@ await sdk.execute(Command.RESIZE, { height: 500 });
 
 ### Get signed token
 
-A new JSON Web Token (JWT) that is valid for 5 minutes will be generated. It can be verified using the JWT secret which you can add from Marketplace Manager when configuring a surface. If it’s not specified, use app’s client secret instead. JWT contains Pipedrive user and company ids.
+A new JSON Web Token (JWT) that is valid for 5 minutes will be generated. It can be verified using
+the JWT secret which you can add from Marketplace Manager when configuring a surface. If it’s not
+specified, use app’s client secret instead. JWT contains Pipedrive user and company ids.
 
-JWT can be used to assure that the surface is loaded by Pipedrive. It can be passed to your API requests and be verified on the server side. Note that JWT expires in 5 minutes so use this command to get a new one.
+JWT can be used to assure that the surface is loaded by Pipedrive. It can be passed to your API
+requests and be verified on the server side. Note that JWT expires in 5 minutes so use this command
+to get a new one.
 
 **Response**
 
-| Parameter|Type | Description | Notes |
-| --- | --- | --- | --- |
-| token | String | | |
+| Parameter | Type   | Description | Notes |
+|-----------|--------|-------------|-------|
+| token     | String |             |       |
 
 **Example**
 
@@ -148,22 +155,24 @@ const { token } = await sdk.execute(Command.GET_SIGNED_TOKEN);
 
 ### Open modal
 
-Opens an [embedded action](#embedded-action) or a new Pipedrive [Deal](#new-deal-modal), [Organization](#new-organization-modal) or [Person](#new-person-modal) modal
+Opens an [embedded action](#embedded-action), [custom surface modal](#custom-surface-modal) or a new
+Pipedrive [Deal](#new-deal-modal), [Organization](#new-organization-modal)
+or [Person](#new-person-modal) modal
 
 ### Embedded action
 
 **Parameters for embedded action modal**
 
-| Parameter|Type | Description | Notes |
-| --- | --- | --- | --- |
-| type | Modal | | required |
+| Parameter | Type   | Description                | Notes    |
+|-----------|--------|----------------------------|----------|
+| type      | Modal  |                            | required |
 | action_id | String | Embedded action id or name | required |
 
 **Response**
 
-| Parameter|Type | Description | Notes |
-| --- | --- | --- | --- |
-| status | String | Indicates if modal was submitted or closed | |
+| Parameter | Type   | Description                                | Notes |
+|-----------|--------|--------------------------------------------|-------|
+| status    | String | Indicates if modal was submitted or closed |       |
 
 **Example**
 
@@ -174,24 +183,52 @@ const { status } = await sdk.execute(Command.OPEN_MODAL, {
 });
 ```
 
+### Custom surface modal
+
+**Parameters for custom surface modal**
+
+| Parameter | Type   | Description                                                                                                                               | Notes    |
+|-----------|--------|-------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| type      | Modal  |                                                                                                                                           | required |
+| action_id | String | Custom surface id or name                                                                                                                 | required |
+| data      | Object | Object to be passed as stringified JSON to iframe, should be used with caution taking into account the maximum length of HTTP GET request | optional |
+
+**Response**
+
+| Parameter | Type   | Description                                | Notes |
+|-----------|--------|--------------------------------------------|-------|
+| status    | String | Indicates if modal was submitted or closed |       |
+
+**Example**
+
+```javascript
+const { status } = await sdk.execute(Command.OPEN_MODAL, {
+  type: Modal.CUSTOM_SURFACE,
+  action_id: 'Open settings',
+  data: {
+    item: 'xyz'
+  }
+});
+```
+
 ### New deal modal
 
 **Parameters for new deal modal**
 
-| Parameter|Type | Description | Notes |
-| --- | --- | --- | --- |
-| type | Modal | | required |
-| prefill | Object | Object to prefill some deal modal fields | optional |
-| prefill.title | String | Deal title | optional |
+| Parameter            | Type   | Description                                | Notes    |
+|----------------------|--------|--------------------------------------------|----------|
+| type                 | Modal  |                                            | required |
+| prefill              | Object | Object to prefill some deal modal fields   | optional |
+| prefill.title        | String | Deal title                                 | optional |
 | prefill.organization | String | Organization name to whom the deal belongs | optional |
-| prefill.person | String | Person name to whom the deal belongs | optional |
+| prefill.person       | String | Person name to whom the deal belongs       | optional |
 
 **Response**
 
-| Parameter|Type | Description | Notes |
-| --- | --- | --- | --- |
-| status | String | Indicates if modal was submitted or closed | |
-| id | Number | ID of created deal if it was submitted | optional |
+| Parameter | Type   | Description                                | Notes    |
+|-----------|--------|--------------------------------------------|----------|
+| status    | String | Indicates if modal was submitted or closed |          |
+| id        | Number | ID of created deal if it was submitted     | optional |
 
 **Example**
 
@@ -208,19 +245,19 @@ const { status, id } = await sdk.execute(Command.OPEN_MODAL, {
 
 **Parameters for new person modal**
 
-| Parameter|Type | Description | Notes |
-| --- | --- | --- | --- |
-| type | Modal | | required |
-| prefill | Object | Object to prefill some new person modal fields | optional |
-| prefill.name | String | Person name | optional |
-| prefill.organization | String | Organization name to whom the person belongs | optional |
+| Parameter            | Type   | Description                                    | Notes    |
+|----------------------|--------|------------------------------------------------|----------|
+| type                 | Modal  |                                                | required |
+| prefill              | Object | Object to prefill some new person modal fields | optional |
+| prefill.name         | String | Person name                                    | optional |
+| prefill.organization | String | Organization name to whom the person belongs   | optional |
 
 **Response**
 
-| Parameter|Type | Description | Notes |
-| --- | --- | --- | --- |
-| status | String | Indicates if modal was submitted or closed | |
-| id | Number | ID of added person if it was submitted | optional |
+| Parameter | Type   | Description                                | Notes    |
+|-----------|--------|--------------------------------------------|----------|
+| status    | String | Indicates if modal was submitted or closed |          |
+| id        | Number | ID of added person if it was submitted     | optional |
 
 **Example**
 
@@ -238,18 +275,18 @@ const { status, id } = await sdk.execute(Command.OPEN_MODAL, {
 
 **Parameters for new organization modal**
 
-| Parameter|Type | Description | Notes |
-| --- | --- | --- | --- |
-| type | Modal | | required |
-| prefill | Object | Object to prefill some new organization modal fields | optional |
-| prefill.name | String | Organization name | optional |
+| Parameter    | Type   | Description                                          | Notes    |
+|--------------|--------|------------------------------------------------------|----------|
+| type         | Modal  |                                                      | required |
+| prefill      | Object | Object to prefill some new organization modal fields | optional |
+| prefill.name | String | Organization name                                    | optional |
 
 **Response**
 
-| Parameter|Type | Description | Notes |
-| --- | --- | --- | --- |
-| status | String | Indicates if modal was submitted or closed | |
-| id | Number | ID of added organization if it was submitted | optional |
+| Parameter | Type   | Description                                  | Notes    |
+|-----------|--------|----------------------------------------------|----------|
+| status    | String | Indicates if modal was submitted or closed   |          |
+| id        | Number | ID of added organization if it was submitted | optional |
 
 **Example**
 
@@ -261,7 +298,6 @@ const { status, id } = await sdk.execute(Command.OPEN_MODAL, {
   }
 });
 ```
-
 
 ### Close modal
 
@@ -294,9 +330,9 @@ Subscribe to surface visibility changes triggered by the user
 
 **Response**
 
-| Parameter|Type | Description | Notes |
-| --- | --- | --- | --- |
-| is_visible | Boolean | Is surface visible to user | |
+| Parameter  | Type    | Description                | Notes |
+|------------|---------|----------------------------|-------|
+| is_visible | Boolean | Is surface visible to user |       |
 
 **Example**
 

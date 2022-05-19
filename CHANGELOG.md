@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.3.0] - 2022-05-19
+
+### Added
+- New type `CUSTOM_SURFACE` for `OPEN_MODAL` command
+
 ## [0.2.0] - 2022-05-06
 
 ### Added
