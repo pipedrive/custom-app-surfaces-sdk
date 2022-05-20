@@ -15,6 +15,7 @@ export enum Command {
 
 export enum Event {
 	VISIBILITY = 'visibility',
+	CLOSE_SURFACE_MODAL = 'close_surface_modal',
 }
 
 export enum MessageType {
@@ -151,6 +152,7 @@ export type EventResponse<T extends Event> = {
 		[Event.VISIBILITY]: {
 			is_visible: boolean;
 		};
+		[Event.CLOSE_SURFACE_MODAL]: void;
 	}[T];
 };
 

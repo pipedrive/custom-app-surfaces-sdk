@@ -341,3 +341,17 @@ sdk.listen(Event.VISIBILITY, ({ error, data }) => {
   // handle event
 });
 ```
+
+### Close surface modal
+
+Subscribe to own custom surface modals' event triggered by SDK `CLOSE_MODAL` command.
+
+**Panel surface** - user collapses or expands the panel
+
+**Example**
+
+```javascript
+sdk.listen(Event.CLOSE_SURFACE_MODAL, () => {
+  // handle event
+});
+```
