@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-- New event `CLOSE_SURFACE_MODAL` for listening the updates from custom surface modal
+- New event `CLOSE_CUSTOM_MODAL` for listening the updates from custom surface modal
+
+### Updated
+- Rename `Modal` type `EMBEDDED_ACTION` to `JSON_MODAL`
+- Rename `Modal` type `CUSTOM_SURFACE` to `CUSTOM_MODAL`
 
 ## [0.3.0] - 2022-05-19
 
