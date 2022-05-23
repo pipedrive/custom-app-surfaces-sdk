@@ -15,7 +15,7 @@ export enum Command {
 
 export enum Event {
 	VISIBILITY = 'visibility',
-	CLOSE_SURFACE_MODAL = 'close_surface_modal',
+	CLOSE_CUSTOM_MODAL = 'close_custom_modal',
 }
 
 export enum MessageType {
@@ -48,8 +48,8 @@ export enum Modal {
 	DEAL = 'deal',
 	ORGANIZATION = 'organization',
 	PERSON = 'person',
-	EMBEDDED_ACTION = 'embedded_action',
-	CUSTOM_SURFACE = 'custom_surface',
+	JSON_MODAL = 'json_modal',
+	CUSTOM_MODAL = 'custom_modal',
 }
 
 export type DealModalAttributes = {
@@ -76,13 +76,13 @@ export type OrganizationModalAttributes = {
 	};
 };
 
-export type EmbeddedActionModalAttributes = {
-	type: Modal.EMBEDDED_ACTION;
+export type JSONModalAttributes = {
+	type: Modal.JSON_MODAL;
 	action_id: string;
 };
 
-export type CustomSurfaceModalAttributes = {
-	type: Modal.CUSTOM_SURFACE;
+export type CustomModalAttributes = {
+	type: Modal.CUSTOM_MODAL;
 	action_id: string;
 	data?: {
 		[key: string]: string;
@@ -93,8 +93,8 @@ export type ModalAttributes =
 	| OrganizationModalAttributes
 	| DealModalAttributes
 	| PersonModalAttributes
-	| EmbeddedActionModalAttributes
-	| CustomSurfaceModalAttributes;
+	| JSONModalAttributes
+	| CustomModalAttributes;
 
 export enum ModalStatus {
 	CLOSED = 'closed',
@@ -152,7 +152,7 @@ export type EventResponse<T extends Event> = {
 		[Event.VISIBILITY]: {
 			is_visible: boolean;
 		};
-		[Event.CLOSE_SURFACE_MODAL]: void;
+		[Event.CLOSE_CUSTOM_MODAL]: void;
 	}[T];
 };
 

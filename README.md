@@ -155,13 +155,13 @@ const { token } = await sdk.execute(Command.GET_SIGNED_TOKEN);
 
 ### Open modal
 
-Opens an [embedded action](#embedded-action), [custom surface modal](#custom-surface-modal) or a new
+Opens an [JSON modal](#json-modal), [custom modal](#custom-modal) or a new
 Pipedrive [Deal](#new-deal-modal), [Organization](#new-organization-modal)
 or [Person](#new-person-modal) modal
 
 ### Embedded action
 
-**Parameters for embedded action modal**
+**Parameters for JSON modal**
 
 | Parameter | Type   | Description                | Notes    |
 |-----------|--------|----------------------------|----------|
@@ -178,14 +178,14 @@ or [Person](#new-person-modal) modal
 
 ```javascript
 const { status } = await sdk.execute(Command.OPEN_MODAL, {
-  type: Modal.EMBEDDED_ACTION,
+  type: Modal.JSON_MODAL,
   action_id: 'Open settings'
 });
 ```
 
-### Custom surface modal
+### Custom modal
 
-**Parameters for custom surface modal**
+**Parameters for custom modal**
 
 | Parameter | Type   | Description                                                                                                                               | Notes    |
 |-----------|--------|-------------------------------------------------------------------------------------------------------------------------------------------|----------|
@@ -203,7 +203,7 @@ const { status } = await sdk.execute(Command.OPEN_MODAL, {
 
 ```javascript
 const { status } = await sdk.execute(Command.OPEN_MODAL, {
-  type: Modal.CUSTOM_SURFACE,
+  type: Modal.CUSTOM_MODAL,
   action_id: 'Open settings',
   data: {
     item: 'xyz'
@@ -344,14 +344,14 @@ sdk.listen(Event.VISIBILITY, ({ error, data }) => {
 
 ### Close surface modal
 
-Subscribe to own custom surface modals' event triggered by SDK `CLOSE_MODAL` command.
+Subscribe to own custom modals' event triggered by SDK `CLOSE_MODAL` command.
 
 **Panel surface** - user collapses or expands the panel
 
 **Example**
 
 ```javascript
-sdk.listen(Event.CLOSE_SURFACE_MODAL, () => {
+sdk.listen(Event.CLOSE_CUSTOM_MODAL, () => {
   // handle event
 });
 ```
