@@ -114,9 +114,10 @@ const { confirmed } = await sdk.execute(Command.SHOW_CONFIRMATION, {
 
 Resizes custom UI extension with provided height and width
 
-**Custom panel** - only height can be changed and the value must be between 100 and 750 (pixels).
+**Custom panel** - only height can be changed and the value must be between 100px and 750px.
 
-**Custom modal** - both height and width can be changed and the value must be between 100 and 750 (pixels).
+**Custom modal** - both height and width can be changed. The minimum height is 120px and the minimum width is 320px . The maximum height and width are 
+limited to the user's browser dimensions.
 
 **Parameters**
 
