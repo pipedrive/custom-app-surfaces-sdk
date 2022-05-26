@@ -1,9 +1,8 @@
-## Custom App Surfaces SDK
+## Custom UI extensions SDK
 
-The SDK provides interactivity between custom app surfaces and Pipedrive.
+This SDK provides interactivity between custom UI extensions and Pipedrive.
 
-Learn more about custom app surfaces
-from [Developer documentation](https://pipedrive.readme.io/docs/custom-app-surfaces).
+Learn more about custom UI extensions from [Developer documentation](https://pipedrive.readme.io/docs/custom-app-surfaces).
 
 `npm install --save @pipedrive/custom-app-surfaces-sdk`
 
@@ -19,13 +18,13 @@ from [Developer documentation](https://pipedrive.readme.io/docs/custom-app-surfa
   - [Close modal](#close-modal)
 - [Events](#events)
   - [Surface visibility](#surface-visibility)
+  - [Close custom modal](#close-custom-modal)
 
 ## Initialization
 
-In order to display a custom app surface to the user, the SDK has to be initialized.
-In the iframe request, query id attribute is passed, which has to be provided to SDK constructor.
-The SDK will try to read it from the URL query. If the URL is modified (e.g. with redirects), then
-it has to be passed manually.
+In order to display a custom UI extension to a user, this SDK has to be initialized.
+In the iframe request, query id attribute is passed, which has to be provided to the SDK constructor.
+The SDK will try to read it from the URL query. If the URL is modified (e.g. with redirects), then it has to be passed manually.
 
 ```javascript
 import SurfaceSDK from '@pipedrive/custom-app-surfaces-sdk';
@@ -114,16 +113,19 @@ const { confirmed } = await sdk.execute(Command.SHOW_CONFIRMATION, {
 
 ### Resize
 
-Resizes custom app surface with provided height and width
+Resizes custom UI extension with provided height and width
 
-**Panel surface** - only height can be changed and the value must be between 100 and 750 (pixels).
+**Custom panel** - only height can be changed and the value must be between 100px and 750px.
+
+**Custom modal** - both height and width can be changed. The minimum height is 120px and the minimum width is 320px . The maximum height and width are
+limited to the user's browser dimensions.
 
 **Parameters**
 
 | Parameter | Type   | Description           | Notes    |
 |-----------|--------|-----------------------|----------|
-| height    | Number | Height of the surface | optional |
-| width     | Number | Width of the surface  | optional |
+| height    | Number | Height of the custom panel/modal | optional |
+| width     | Number | Width of the custom panel/modal  | optional |
 
 **Example**
 
@@ -155,18 +157,18 @@ const { token } = await sdk.execute(Command.GET_SIGNED_TOKEN);
 
 ### Open modal
 
-Opens an [embedded action](#embedded-action), [custom surface modal](#custom-surface-modal) or a new
+Opens an [JSON modal](#json-modal), [custom modal](#custom-modal) or a new
 Pipedrive [Deal](#new-deal-modal), [Organization](#new-organization-modal)
 or [Person](#new-person-modal) modal
 
-### Embedded action
+### JSON modal action
 
-**Parameters for embedded action modal**
+**Parameters for JSON modal**
 
 | Parameter | Type   | Description                | Notes    |
 |-----------|--------|----------------------------|----------|
 | type      | Modal  |                            | required |
-| action_id | String | Embedded action id or name | required |
+| action_id | String | JSON modal action id or name | required |
 
 **Response**
 
@@ -178,19 +180,19 @@ or [Person](#new-person-modal) modal
 
 ```javascript
 const { status } = await sdk.execute(Command.OPEN_MODAL, {
-  type: Modal.EMBEDDED_ACTION,
+  type: Modal.JSON_MODAL,
   action_id: 'Open settings'
 });
 ```
 
-### Custom surface modal
+### Custom modal
 
-**Parameters for custom surface modal**
+**Parameters for custom modal**
 
 | Parameter | Type   | Description                                                                                                                               | Notes    |
 |-----------|--------|-------------------------------------------------------------------------------------------------------------------------------------------|----------|
 | type      | Modal  |                                                                                                                                           | required |
-| action_id | String | Custom surface id or name                                                                                                                 | required |
+| action_id | String | Custom modal id or name                                                                                                                 | required |
 | data      | Object | Object to be passed as stringified JSON to iframe, should be used with caution taking into account the maximum length of HTTP GET request | optional |
 
 **Response**
@@ -203,7 +205,7 @@ const { status } = await sdk.execute(Command.OPEN_MODAL, {
 
 ```javascript
 const { status } = await sdk.execute(Command.OPEN_MODAL, {
-  type: Modal.CUSTOM_SURFACE,
+  type: Modal.CUSTOM_MODAL,
   action_id: 'Open settings',
   data: {
     item: 'xyz'
@@ -301,7 +303,7 @@ const { status, id } = await sdk.execute(Command.OPEN_MODAL, {
 
 ### Close modal
 
-Closes an active modal window, applicable only from Custom Surface Modal.
+Closes an active modal window; applicable only for custom modal.
 
 **Example**
 
@@ -322,9 +324,9 @@ const stopReceivingEvents = sdk.listen(event, ({ error, data }) => {
 stopReceivingEvents(); // Call this function to stop receiving events
 ```
 
-### Surface visibility
+### Custom panel visibility
 
-Subscribe to surface visibility changes triggered by the user
+Subscribe to custom panel visibility changes that are triggered by the user.
 
 **Panel surface** - user collapses or expands the panel
 
@@ -338,6 +340,20 @@ Subscribe to surface visibility changes triggered by the user
 
 ```javascript
 sdk.listen(Event.VISIBILITY, ({ error, data }) => {
+  // handle event
+});
+```
+
+### Close custom modal
+
+Subscribe to custom modal events that are triggered by this SDK's `CLOSE_MODAL` command or user interaction with the custom modal.
+
+**Panel surface** - user closes the custom modal
+
+**Example**
+
+```javascript
+sdk.listen(Event.CLOSE_CUSTOM_MODAL, () => {
   // handle event
 });
 ```
