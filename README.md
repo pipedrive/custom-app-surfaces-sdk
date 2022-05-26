@@ -18,6 +18,7 @@ Learn more about custom UI extensions from [Developer documentation](https://pip
   - [Close modal](#close-modal)
 - [Events](#events)
   - [Surface visibility](#surface-visibility)
+  - [Close custom modal](#close-custom-modal)
 
 ## Initialization
 
@@ -116,7 +117,7 @@ Resizes custom UI extension with provided height and width
 
 **Custom panel** - only height can be changed and the value must be between 100px and 750px.
 
-**Custom modal** - both height and width can be changed. The minimum height is 120px and the minimum width is 320px . The maximum height and width are 
+**Custom modal** - both height and width can be changed. The minimum height is 120px and the minimum width is 320px . The maximum height and width are
 limited to the user's browser dimensions.
 
 **Parameters**
@@ -340,7 +341,7 @@ Subscribe to custom panel visibility changes that are triggered by the user.
 ```javascript
 sdk.listen(Event.VISIBILITY, ({ error, data }) => {
   // handle event
-})'s;
+});
 ```
 
 ### Close custom modal
