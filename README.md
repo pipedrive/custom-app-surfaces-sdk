@@ -1,7 +1,6 @@
-
 ## Custom UI extensions SDK
 
-> ⚠️ This package is deprecated. Please use [@pipedrive/app-extensions-sdk](https://www.npmjs.com/package/@pipedrive/app-extensions-sdk) instead.
+> ⚠️ This package **has been deprecated**. Please use [@pipedrive/app-extensions-sdk](https://www.npmjs.com/package/@pipedrive/app-extensions-sdk) instead.
 
 This SDK provides interactivity between custom UI extensions and Pipedrive.
 
